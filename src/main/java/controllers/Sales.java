@@ -6,10 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Sales {
@@ -100,10 +97,13 @@ public class Sales {
     // - collect the total price of all the items bought using the
     // handleItemsTotal method and log the total to the console
     public static void createNewSale() {
-        // Add prompts to tell the user what data they need to enter next
-
 
 
     }
 }
+
+
+
+
+
 
