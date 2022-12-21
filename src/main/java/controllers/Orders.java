@@ -9,13 +9,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Orders {
-    //Fields
+
     static Connection connection = Database.DbConn();
     static PreparedStatement ps;
     static ResultSet rs;
     static Scanner scanner = new Scanner(System.in);
 
-    // Create a table for the class above if and only it doesn't already exist.
+
     public static boolean createOrdersTable() {
         try {
             ps = connection.prepareStatement("CREATE TABLE IF NOT EXISTS orders(" +
@@ -54,4 +54,7 @@ public class Orders {
         }
 
     }
+
+
+
 }
