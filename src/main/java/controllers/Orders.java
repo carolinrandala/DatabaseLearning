@@ -40,21 +40,18 @@ public class Orders {
             ps = connection.prepareStatement("SELECT * FROM orders");
             rs = ps.executeQuery();
 
-            //Loop through the result set
+            // Loop through the result set
             while (rs.next()) {
-                String sale_id = "sale_id: " + rs.getInt("sale_id");
-                String item_id = "item_id: " + rs.getInt("item_id");
-                String qty_purchased = "qty_purchased: " + rs.getInt("qty_purchased");
-                String item_total = "item_total: " + rs.getInt("item_total");
-
-                System.out.println(sale_id + " " + item_id + " " + qty_purchased + " " + item_total);
+                String id = "sale_id: " + rs.getInt("sale_id");
+                String itemId = "item_id: " + rs.getString("item_id");
+                String qty = "qty_purchased: " + rs.getString("qty_purchased");
+                String itemTotal = "item_total: " + rs.getInt("item_total");
+                System.out.println(id + " " + itemId + " " + itemTotal + " " + qty);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
 
 
 }

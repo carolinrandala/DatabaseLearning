@@ -53,6 +53,7 @@ public class Item {
         System.out.print("Enter the item name: ");
         String name = scanner.nextLine();
 
+
         System.out.print("Enter the description name: ");
         String desc = scanner.nextLine();
 

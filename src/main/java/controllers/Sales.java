@@ -1,13 +1,14 @@
 package controllers;
 
 import db.Database;
+import objects.OrderObject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class Sales {
 
@@ -38,28 +39,34 @@ public class Sales {
 
     public static void getAllSales() {
         try {
-            ps = connection.prepareStatement("SELECT * FROM sales");
+            ps = connection.prepareStatement("SELECT sales.*, customer.first_name, customer.last_name FROM sales " +
+                    "LEFT JOIN customer ON sales.customer_id = customer.id");
             rs = ps.executeQuery();
 
-            //Loop through the result set
+            // Loop through the result set
             while (rs.next()) {
                 String id = "id: " + rs.getInt("id");
-                String customer_id = "customer_id: " + rs.getInt("customer_id");
-                String date_purchased = "date_purchased: " + rs.getTimestamp("date_purchased");
+                String custId = "customer_id: " + rs.getInt("customer_id");
+                String datePurchased = "date_purchased: " + rs.getTimestamp("date_purchased");
                 String total = "total: " + rs.getFloat("total");
-                System.out.println(id + " " + customer_id + " " + date_purchased + " " + total);
+                String firstName = "first_name: " + rs.getString("first_name");
+                String lastName = "last_name: " + rs.getString("last_name");
+                System.out.println(id + ", " + custId + ", " + total + ", " + firstName + ", " + lastName + ", " + datePurchased);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static Map<Integer, Float> handleItemTotal() {
+
+
+    private static List<OrderObject> handleItemTotal() {
+
         System.out.println("Enter how many items were bought: ");
         int numberOfItems = scanner.nextInt();
 
-        Map<Integer, Float> items = new HashMap<>();
+        //Map<Integer, Float> items = new HashMap<>();
+        List<OrderObject> itemsPurchased = new ArrayList<>();
         float itemTotal = 0;
 
         for (int i = 0; i < numberOfItems; i++) {
@@ -82,25 +89,81 @@ public class Sales {
                 }
                 itemTotal = itemPrice * qty;
 
-                items.putIfAbsent(itemId, itemTotal);
+               // items.putIfAbsent(itemId, itemTotal);
+                itemsPurchased.add(new OrderObject(itemId, qty, itemTotal));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
         }
-        return items;
+        return itemsPurchased;
     }
 
-    // Exercise:
-    // Complete the sales class by adding the following methods.
-    // Add a method called createNewSale:
-    // - collect the total price of all the items bought using the
-    // handleItemsTotal method and log the total to the console
+    private static float collateOrderTotal(List<OrderObject> orders) {
+        float sum = 0;
+
+        for (OrderObject order : orders) {
+            sum += order.getTotalOnItem();
+        }
+        return sum;
+    }
+
+    public static void createSaleAndOrder() {
+        // Prompt the user for the customer id
+        System.out.println("Enter the customer id: ");
+        int custId = scanner.nextInt();
+
+        // Get the items purchased
+        List<OrderObject> itemsPurchased = handleItemTotal();
+
+        // Get the total on the items
+        float totalSale = collateOrderTotal(itemsPurchased);
+
+        int saleId = 0;
+
+        try {
+            ps = connection.prepareStatement("INSERT INTO sales(customer_id, date_purchased, total) " +
+                    "VALUES(" + custId + ", current_timestamp, " + totalSale + " ) RETURNING id");
+            rs = ps.executeQuery();
+
+            // Loop through the result set until empty
+            while (rs.next()) {
+                saleId = rs.getInt("id");
+                // for each sale, use the id to create the orders.
+                for (OrderObject order: itemsPurchased) {
+                    ps = connection.prepareStatement("INSERT INTO orders(sale_id, item_id, qty_purchased, item_total) " +
+                            "VALUES(" + saleId + ", " + order.getItemId() + ", " + order.getQtyPurchased() + ", " +
+                            order.getTotalOnItem() + ")");
+
+                    ps.execute();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /*
     public static void createNewSale() {
+        // Add a method called createNewSale:
+        // - collect the total price of all the items bought using the
+        // handleItemsTotal method and log the total to the console
 
-
+        float sum = 0;
+        for (float value: handleItemTotal().values()) {
+            sum += value;
+        }
+        System.out.println("Total price of the items: " + sum);
+        System.out.println();
     }
+
+     */
+
 }
+
+
+
 
 
 

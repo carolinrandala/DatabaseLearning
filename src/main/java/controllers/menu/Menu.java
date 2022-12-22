@@ -57,7 +57,7 @@ public class Menu {
                 itemsMenu();
                 break;
             case 2:
-                Item.createItemsTable();
+                Item.createNewItem();
                 itemsMenu();
                 break;
             default:
@@ -106,9 +106,9 @@ public class Menu {
 
     public static void salesMenu() {
         System.out.println("Pick a submenu number to continue: ");
-        System.out.println("1. View all the sales");
-        System.out.println("2. Get Item total");
-        System.out.println("3. Create a new sale");
+        System.out.println("1. Get all sales");
+        System.out.println("2. Create a new sale and order");
+        //System.out.println("3. Create a new sale");
 
 
         System.out.println();
@@ -124,10 +124,9 @@ public class Menu {
                 salesMenu();
                 break;
             case 2:
-                Sales.handleItemTotal();
+                Sales.createSaleAndOrder();
                 salesMenu();
             case 3:
-                Sales.createNewSale();
                 salesMenu();
                 break;
             default:
