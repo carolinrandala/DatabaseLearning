@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Item {
+public class ItemController {
     static Connection connection = Database.DbConn();
     static PreparedStatement ps;
     static ResultSet rs;

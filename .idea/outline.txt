@@ -1,0 +1,5 @@
+- configure hibernate - ORM - Object Relational Model
+- create and use POJO(Plain Old Java Object)s as entities for tables and
+to communicate with the respective tables
+- Use POJOs to perform Read and Create operation
+- Performing a left join using Hibernate on the POJO

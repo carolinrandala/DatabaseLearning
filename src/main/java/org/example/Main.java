@@ -1,14 +1,10 @@
 package org.example;
 
-import controllers.Item;
-import controllers.Orders;
-import controllers.Sales;
 import db.Database;
-import entities.Customer;
 import entities.Items;
-import exercise.menu.Menu;
+import entities.Orders;
+import entities.Sales;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,11 +12,14 @@ public class Main {
 
         Session session = Database.getHibSesh();
 
-        /*
-        Customer cust = session.find(Customer.class, 2);
-        System.out.println(cust);
+        Orders order = session.find(Orders.class, 1);
+        System.out.println(order);
 
-        Customer barry = new Customer("Barry", "Allen", "barry@allen.com");
+
+        // Sales sale = session.find(Sales.class, 3);
+        // System.out.println(sale);
+
+        /* Customer barry = new Customer("Barry", "Allen", "barry@allen.com");
 
         try {
             Transaction trans = session.beginTransaction();
@@ -30,9 +29,11 @@ public class Main {
             e.printStackTrace();
         }
 
+
          */
-        Items items = session.find(Items.class, 10);
-        System.out.println(items);
+
+        //Items items = session.find(Items.class, 10);
+         //System.out.println(items);
 
         /*
         Items item = new Items("Water", "Something to drink", 20, 8.60f);
@@ -52,4 +53,8 @@ public class Main {
     // Using Hibernate create the entity object for the items class and
     // make find queries on the items table to retrieve any items you previously stored in it.
     // Also demonstrate how you would save a new entry into the items table
+
+    // 30min(18:41)
+    // Using Hibernate create the entity object for the orders class and
+    // make find queries on the order table to test your work
 }

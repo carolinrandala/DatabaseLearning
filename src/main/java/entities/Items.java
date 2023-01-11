@@ -1,6 +1,7 @@
 package entities;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity(name = "items")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Items {
     // Using Hibernate create the entity object for the items class

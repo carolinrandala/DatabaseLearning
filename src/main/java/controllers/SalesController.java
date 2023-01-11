@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 
-public class Sales {
+public class SalesController {
 
     static Connection connection = Database.DbConn();
     static PreparedStatement ps;
