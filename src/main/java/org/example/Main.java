@@ -1,10 +1,13 @@
 package org.example;
 
 import db.Database;
+import entities.Customer;
 import entities.Items;
 import entities.Orders;
 import entities.Sales;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -12,25 +15,27 @@ public class Main {
 
         Session session = Database.getHibSesh();
 
-        Orders order = session.find(Orders.class, 1);
-        System.out.println(order);
+
+        //Customer minaj = new Customer("Nicky", "Minaj", "minaj@gmail.com");
+        //minaj.setFirstname("Billy");
+        //System.out.println(minaj);
+        Customer.deleteCustomer(9);
+        Customer.listCustomers();
+
+        //Orders order = session.find(Orders.class, 1);
+        //System.out.println(order);
+
+        // - How to hack the select * from []; query
+        //Customer.listCustomers();
 
 
         // Sales sale = session.find(Sales.class, 3);
         // System.out.println(sale);
 
-        /* Customer barry = new Customer("Barry", "Allen", "barry@allen.com");
-
-        try {
-            Transaction trans = session.beginTransaction();
-            session.save(barry);
-            trans.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
-         */
+
+
 
         //Items items = session.find(Items.class, 10);
          //System.out.println(items);
@@ -46,7 +51,12 @@ public class Main {
             e.printStackTrace();
         }
         */
+
+
+
     }
+
+
 
 
 

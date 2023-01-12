@@ -33,6 +33,12 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-documentation</artifactId>
+            <version>3.5.4-Final</version>
+            <type>pom</type>
+        </dependency>
 
     </dependencies>
 
