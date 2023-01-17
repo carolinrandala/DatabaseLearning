@@ -8,19 +8,20 @@ import entities.Sales;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
         //Menu.mainMenu();
 
         Session session = Database.getHibSesh();
-
+        Scanner scanner = new Scanner(System.in);
 
         //Customer minaj = new Customer("Nicky", "Minaj", "minaj@gmail.com");
         //minaj.setFirstname("Billy");
         //System.out.println(minaj);
-        Customer.deleteCustomer(9);
-        Customer.listCustomers();
+        //Customer.deleteCustomer(9);
 
         //Orders order = session.find(Orders.class, 1);
         //System.out.println(order);

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import java.util.List;
 
 
+
 @Entity(name = "customer")
 @Data
 @NoArgsConstructor
@@ -92,6 +93,7 @@ public class Customer {
             e.printStackTrace();
         }
     }
+
     public static void deleteCustomer(int customerId) {
         // - Differences between certain Hibernate methods
 
